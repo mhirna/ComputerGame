@@ -1,11 +1,13 @@
+
 public class Elf extends Character{
+
     public Elf(){
-        hp = 10;
-        power = 10;
+        this.hp = 10;
+        this.power = 10;
     }
 
     void kick(Character c){
-        if (c.hp < this.hp){
+        if (c.getHp() < this.hp){
             c.hp = 0;
         }
         else {

@@ -6,12 +6,13 @@ public class King extends Character{
     private Random rand = new Random();
 
     public King(){
-        hp = rand.nextInt(max - min + 1) + min;
-        power = rand.nextInt(max - min + 1) + min;
+        this.hp = rand.nextInt(max - min + 1) + min;
+        this.power = rand.nextInt(max - min + 1) + min;
     }
 
     void kick(Character c){
-        int reduce = rand.nextInt(max - min + 1) + min;
+        int reduce = rand.nextInt(this.power - min + 1) + min;
+        System.out.println(reduce);
         if (c.hp > reduce){
             c.hp -= reduce;
         }

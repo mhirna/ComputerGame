@@ -1,24 +1,19 @@
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import com.sun.deploy.util.ArrayUtil;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
-@RunWith(Arquillian.class)
 public class CharacterFactoryTest {
-    @Test
-    public void createCharacter() throws Exception {
-    }
+    CharacterFactory factoryTest = new CharacterFactory();
+    List<String> allCharacters = Arrays.asList("Hobbit", "Elf", "King", "Knight");
 
-    @Deployment
-    public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class)
-                .addClass(CharacterFactory.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+    @Test
+    public void createCharacterTest() throws Exception {
+        Character characterTest = factoryTest.createCharacter();
+        assertTrue(allCharacters.contains(characterTest.getClass().getName()));
     }
 
 }

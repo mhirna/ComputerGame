@@ -1,3 +1,4 @@
+
 public abstract class Character {
     protected int power;
     protected int hp;
@@ -5,12 +6,6 @@ public abstract class Character {
     public Character(int power, int hp){
         this.power = power;
         this.hp = hp;
-    }
-
-
-    public Character(Character character){
-        character.power = getPower();
-        character.hp = getHp();
     }
 
     protected Character() {
@@ -22,6 +17,14 @@ public abstract class Character {
 
     public int getHp(){
         return hp;
+    }
+
+    public void setPower(int power) {
+        this.power = power;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 
     public boolean isAlive(){

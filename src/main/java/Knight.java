@@ -11,7 +11,7 @@ public class Knight extends Character{
     }
 
     void kick(Character c){
-        int reduce = rand.nextInt(max - min + 1) + min;
+        int reduce = rand.nextInt(this.power - min + 1) + min;
         if (c.hp > reduce){
             c.hp -= reduce;
         }

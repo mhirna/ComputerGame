@@ -1,36 +1,60 @@
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import java.lang.reflect.InvocationTargetException;
 
 import static org.junit.Assert.*;
 
-@RunWith(Arquillian.class)
 public class CharacterTest {
+    Character someCharacterTest = new Character(3, 5) {
+        @Override
+        void kick(Character c) {
+            System.out.println("Change some character hp");
+        }
+    };
+
+    Character someOtherCharecter = new Character(1, 2) {
+        @Override
+        void kick(Character c) {
+            System.out.println("Change other character hp");
+        }
+    };
+
     @Test
-    public void getPower() throws Exception {
+    public void setPowerTest() throws Exception {
+        int startPower = someCharacterTest.getPower();
+        someCharacterTest.setPower(startPower + 10);
+        assertTrue(someCharacterTest.getPower() - startPower == 10);
     }
 
     @Test
-    public void getHp() throws Exception {
+    public void setHpTest() throws Exception {
+        int startHp = someCharacterTest.getHp();
+        someCharacterTest.setHp(startHp + 5);
+        assertTrue(someCharacterTest.getHp() - startHp == 5);
     }
 
     @Test
-    public void isAlive() throws Exception {
+    public void getPowerTest() throws Exception {
+        assertTrue(someCharacterTest.getPower() == 3);
+    }
+
+    @Test
+    public void getHpTest() throws Exception {
+        assertTrue(someCharacterTest.getHp() == 5);
+    }
+
+    @Test
+    public void isAliveTest() throws Exception {
+        someCharacterTest.setHp(0);
+        assertFalse(someCharacterTest.isAlive());
     }
 
     @Test
     public void kick() throws Exception {
-    }
-
-    @Deployment
-    public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class)
-                .addClass(Character.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+        someOtherCharecter.setHp(5);
+        someCharacterTest.setHp(5);
+        someCharacterTest.kick(someOtherCharecter);
+        assertTrue(someCharacterTest.isAlive() && someOtherCharecter.isAlive());
     }
 
 }
