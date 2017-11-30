@@ -8,10 +8,10 @@ public class KnightTest {
 
     @Test
     public void kickStrongWarrior() throws Exception {
-        int knightHp = testKnight.getHp();
-        braveWarrior.setHp(knightHp + 1);
+        int knightPower = testKnight.getPower();
+        braveWarrior.setHp(knightPower + 1);
         testKnight.kick(braveWarrior);
-        assertTrue(braveWarrior.getHp() >= 1);
+        assertTrue(braveWarrior.isAlive());
 
     }
 
